@@ -8,11 +8,12 @@ if(!class_exists("Xml"))
   {
     require_once(dirname(__FILE__)."/xml/xml.php");
   }
-/* if(!class_exists("Wysiwyg")) */
-/*   { */
-/*     require_once(dirname(__FILE__)."/wysiwyg/wysiwyg.php"); */
-/*     @include(dirname(__FILE__)."/wysiwyg/classic-wysiwyg.php"); */
-/*   } */
+if(!class_exists("Wysiwyg"))
+  {
+    require_once(dirname(__FILE__)."/wysiwyg/wysiwyg.php");
+    # Non-classed old things for project compatibility
+    include(dirname(__FILE__)."/wysiwyg/classic-wysiwyg.php");
+  }
 
 if(!function_exists('microtime_float'))
   {
