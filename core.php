@@ -236,4 +236,41 @@ if(!function_exists("do_post_request"))
     }
   }
 
+if(!function_exists('deEscape'))
+  {
+    function deEscape($input) {
+      return htmlspecialchars_decode(html_entity_decode(urldecode($input)));
+    }
+  }
+
+
+if(!function_exists('curPageURL'))
+  {
+
+    function curPageURL() {
+      $pageURL = 'http';
+      if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+      $pageURL .= "://";
+      if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+      } else {
+        $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+      }
+      require_once(dirname(__FILE__).'/DBHelper.php');
+      return DBHelper::cleanInput($pageURL);
+    }
+  }
+
+if(!function_exists('appendQuery'))
+  {
+
+    function appendQuery($query) {
+      $url = curPageURL();
+      $url=str_replace("&","&amp;",$url);
+      if(strpos($url,"?")!==FALSE) $url .= "&amp;" . $query;
+      else $url .= "?" . $query;
+      return $url;
+    }
+  }
+
 ?>
