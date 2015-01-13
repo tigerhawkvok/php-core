@@ -97,6 +97,7 @@ if(!function_exists('encode64'))
     function encode64($data) { return base64_encode($data); }
     function decode64($data) 
     {
+      # This is STRICT decoding
       if(@base64_encode(@base64_decode($data,true))==$data) return urldecode(@base64_decode($data));
       return false;
     }
@@ -111,7 +112,7 @@ if(!function_exists('smart_decode64'))
        * if it's a JSON, and sanitize the elements in any case.
        */
       if(is_null($data)) return null; // in case emptyness of data is meaningful
-      $r=decode64($data);
+      $r = urldecode(base64_decode($data));
       if($r===false) return false;
       $jd=json_decode($r,true);
       $working= is_null($jd) ? $r:$jd;
