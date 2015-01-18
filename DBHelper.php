@@ -636,7 +636,7 @@ public function doSoundex($search,$cols = "*",$precleaned = false,$order_by = fa
       }
     else
       {
-        $error = mysqli_error($l);
+        $error = mysqli_error($l) . " - for $query";
         mysqli_query($l,"ROLLBACK");
         return $error;
       }
