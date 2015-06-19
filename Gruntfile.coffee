@@ -20,7 +20,7 @@ module.exports = (grunt) ->
       scripts: ["core.php"]
     phpcsfixer:
       app:
-        dir: ["core.php","db/*.php","xml/*.php","stronghash/*.php","wysiwyg/*.php"]
+        dir: ["core.php","db","xml","stronghash","wysiwyg"]
       options:
         ignoreExitCode: true
         verbose: true
