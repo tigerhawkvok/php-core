@@ -10,7 +10,7 @@
     "coffee-script": "^1.9.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-php-cs-fixer": "0.0.8",
-    "grunt-phplint": "0.0.5",
+    "grunt-phplint": "0.0.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
