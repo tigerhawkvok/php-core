@@ -20,7 +20,7 @@ module.exports = (grunt) ->
       scripts: ["core.php"]
     phpcsfixer:
       app:
-        dir: ["core.php"]
+        dir: ["core.php","db/*.php","xml/*.php","stronghash/*.php","wysiwyg/*.php"]
       options:
         ignoreExitCode: true
         verbose: true
@@ -28,7 +28,7 @@ module.exports = (grunt) ->
         dryRun: false
     watch:
       php:
-        files: ["*.php","db/*.php","xml/*.php","wysiwyg/*.php"]
+        files: ["*.php","db/*.php","xml/*.php","wysiwyg/*.php","stronghash/*.php"]
         tasks: ["phplint"]
   ## Now the tasks
   grunt.registerTask("default",["watch"])
