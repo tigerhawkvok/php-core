@@ -32,7 +32,7 @@ echo "<code class='center-block text-center'>$text</code><br/>";
 $html = Wysiwyg::toHtml($text);
 echo "<div class='alert alert-success center-block'>$html<br/><code>".displayDebug($html,false)."</code></div>";
 echo "<br/>This de-parses as: <div class='alert alert-success center-block'><code>" . Wysiwyg::fromHtml($html) . "</code></div>";
-echo "Full detail: <code>".displayDebug(Wysiwyg::toHtml($text,true),false).displayDebug(Wysiwyg::fromHtml($html),false)"</code>";
+echo "Full detail: <code>".displayDebug(Wysiwyg::toHtml($text,true),false).displayDebug(Wysiwyg::fromHtml($html,true),false)."</code>";
 echo "</section>";
        ?>
   </body>
