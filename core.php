@@ -236,10 +236,7 @@ if (!function_exists('displayDebug')) {
         $string = str_replace('&', '&amp;', $string);
         $string = str_replace('<', '&lt;', $string);
         $string = str_replace('>', '&gt;', $string);
-        if (!$background) {
-            return $string;
-        }
-
+        if(!$background) return $string;
         return "<pre style='background:white;color:black;'>".$string.'</pre>';
     }
 }
@@ -280,6 +277,19 @@ if (!function_exists('do_post_request')) {
 if (!function_exists('deEscape')) {
     function deEscape($input)
     {
+        $find = array(
+            "&#39;",
+            "&#34;",
+            "&#95;",
+            "&#37;"
+        );
+        $replace = array(
+            "'",
+            "\"",
+            "_",
+            "%"
+        );
+        $input = str_replace($find, $replace, $input);
         return htmlspecialchars_decode(html_entity_decode(urldecode($input)));
     }
 }
