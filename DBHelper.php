@@ -110,7 +110,9 @@ class DBHelper
         return $this->openDB();
     }
     public function closeLink() {
-        return mysqli_close($this->getLink());
+        $r = mysqli_close($this->getLink());
+        $this->setLink(null);
+        return $r;
     }
     protected function setSQLURL($url)
     {
@@ -308,7 +310,7 @@ class DBHelper
     public function isEntry($item, $field_name = null, $precleaned = false, $test = false) {
         return $this->is_entry($item, $field_name, $precleaned, $test);
     }
-    
+
     public function is_entry($item, $field_name = null, $precleaned = false, $test = false)
     {
         if ($field_name == null) {
@@ -322,7 +324,7 @@ class DBHelper
         if (false) {
             #is_numeric($item))
 
-      $item_string = $item;
+            $item_string = $item;
         } else {
             $item_string = "'$item'";
         }
@@ -508,7 +510,27 @@ class DBHelper
             return false;
         }
     }
+    
+    
 
+    public function getQueryResults($search, $cols = '*', $boolean_type = 'AND', $loose = false, $precleaned = false, $order_by = false, $debug_query = false) {
+        $this->invalidateLink();
+        $result = $this->doQuery($search, $cols, $boolean_type, $loose, $precleaned, $order_by);
+        $response = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $response[] = $row;
+        }
+        if(empty($response) && $debug_query) {
+            $debug = $this->doQuery($search, $cols, $boolean_type, $loose, $precleaned, $order_by, true);
+            $debug["result"] = $result;
+            return $debug;
+        }
+        return $response;
+    }
+    
+    
+    
+    
     public function doQuery($search, $cols = '*', $boolean_type = 'AND', $loose = false, $precleaned = false, $order_by = false, $debug_query = false)
     {
         /***
